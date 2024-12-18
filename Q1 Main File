@@ -1,0 +1,17 @@
+from q1_utilities import file_to_list, list_to_dict
+
+def main():
+    # Prompt user for the CSV file name
+    filename = input("Please type the .csv file name: ")
+
+    # Convert the file contents to a list of numeric grades
+    grades_list = file_to_list(filename)
+
+    # Convert the list of numeric grades to a dictionary with letter grade frequencies
+    grade_distribution = list_to_dict(grades_list)
+
+    # Display the dictionary
+    print(grade_distribution)
+
+if __name__ == "__main__":
+    main()
