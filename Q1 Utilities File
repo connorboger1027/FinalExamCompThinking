@@ -1,0 +1,44 @@
+def grade_to_letter(grade):
+    # Convert a numeric grade into a letter grade
+    if grade < 0 or grade > 100:
+        return "NA"
+    elif grade > 90:
+        return "A"
+    elif grade > 80:
+        return "B"
+    elif grade > 70:
+        return "C"
+    elif grade > 60:
+        return "D"
+    else:
+        return "F"
+
+def file_to_list(file_name):
+    # Reads a CSV file and returns a list of integer grades
+    grades_list = []
+    with open(file_name, "r") as f:
+        for line in f:
+            data = line.strip().split(",")
+            # Ensure the line has at least two columns
+            if len(data) < 2:
+                continue
+            
+            score_str = data[1].strip()
+            
+            # Check if the second column is a digit (valid numeric grade)
+            # If it's not numeric, it's likely a header line, so we skip it.
+            if score_str.isdigit():
+                score = int(score_str)
+                grades_list.append(score)
+    return grades_list
+
+def list_to_dict(grds_list):
+    # Converts a list of numeric grades into a dictionary of letter grade counts
+    grade_counts = {}
+    for g in grds_list:
+        letter = grade_to_letter(g)
+        if letter in grade_counts:
+            grade_counts[letter] += 1
+        else:
+            grade_counts[letter] = 1
+    return grade_counts
