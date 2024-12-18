@@ -1,0 +1,50 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+
+def age_urban(filename):
+    # Read the CSV file into a DataFrame
+    df_pop = pd.read_csv(filename)
+
+    # Compute the median of the 'Median Age' column
+    med_age = df_pop['Median Age'].median()
+
+    # Filter DataFrame into older and younger countries
+    # df_older: Median Age > median
+    df_older = df_pop[df_pop['Median Age'] > med_age]
+
+    # df_younger: Median Age <= median
+    df_younger = df_pop[df_pop['Median Age'] <= med_age]
+
+    # Compute the mean Urban Population % for both groups
+    mean_older = df_older['Urban Pop %'].mean()
+    mean_younger = df_younger['Urban Pop %'].mean()
+
+    # Define the x-values, y-values, and colors for the bar chart
+    x_val = ['Younger', 'Older']
+    y_val = [mean_younger, mean_older]
+    colors = ['lime', 'green']
+
+    # Create the bar chart
+    fig, ax = plt.subplots()
+    ax.bar(x_val, y_val, color=colors, width=0.7)
+
+    # Label the axes and add a title
+    ax.set_xlabel("Countries")
+    ax.set_ylabel("Urban Population Percentage")
+    ax.set_title("City living for older vs. younger countries")
+
+    # Show the plot
+    plt.show()
+
+def main():
+    # Ask the user for the CSV file name
+    filename = input("What is the name of your file? ")
+
+    # Call the age_urban function to process the data and plot the graph
+    age_urban(filename)
+
+    # Print out what you notice about the graph
+    print("After viewing the graph, I notice differences in urban population percentage between older and younger countries.")
+
+if __name__ == "__main__":
+    main()
