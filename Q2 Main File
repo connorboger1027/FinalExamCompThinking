@@ -1,0 +1,33 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+from q1_utilities import list_to_dict
+
+def main():
+    # Prompt user for the CSV file name
+    filename = input("Please type the .csv file name: ")
+
+    # Read the CSV file into a pandas DataFrame
+    grades_df = pd.read_csv(filename)
+
+    # Extract the numeric grades as a list
+    # Assuming the column is named 'Grade' and contains numeric values
+    grades_list = grades_df['Grade']
+
+    # Convert this list of grades into a dictionary of letter grade frequencies
+    grade_distribution = list_to_dict(grades_list)
+
+    # Create a pie chart
+    # - values() are the counts for each letter grade
+    # - keys() are the labels for each letter grade
+    plt.pie(grade_distribution.values(),
+            labels=grade_distribution.keys(),
+            autopct='%1.2f%%')
+
+    # Add a title (optional)
+    plt.title("Distribution of Letter Grades")
+
+    # Display the plot
+    plt.show()
+
+if __name__ == "__main__":
+    main()
